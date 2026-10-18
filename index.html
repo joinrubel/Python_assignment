@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A personal profile page for Al-Emdad Sikder.">
+    <title>Al-Emdad Sikder | Personal Profile</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --ink: #193b3a;
+            --muted: #526c68;
+            --paper: #f7f5ef;
+            --surface: #fffefa;
+            --teal: #176b63;
+            --coral: #e8795d;
+            --line: #d9e1d9;
+        }
+
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: Georgia, "Times New Roman", serif;
+            line-height: 1.65;
+        }
+
+        a { color: inherit; }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1rem max(1.25rem, calc((100vw - 1100px) / 2));
+            border-bottom: 1px solid var(--line);
+            background: var(--surface);
+        }
+
+        .brand {
+            color: var(--teal);
+            font-family: "Trebuchet MS", sans-serif;
+            font-size: 1rem;
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        nav { display: flex; flex-wrap: wrap; gap: 1.25rem; }
+        nav a { color: var(--muted); font: 600 0.9rem "Trebuchet MS", sans-serif; text-decoration: none; }
+        nav a:hover, nav a:focus-visible { color: var(--coral); }
+
+        main { width: min(1100px, calc(100% - 2.5rem)); margin: 0 auto; }
+
+        .intro {
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(250px, 0.8fr);
+            align-items: center;
+            gap: clamp(2rem, 7vw, 6rem);
+            padding: clamp(3.5rem, 8vw, 7rem) 0;
+        }
+
+        .eyebrow {
+            margin: 0 0 0.7rem;
+            color: var(--coral);
+            font: 800 0.78rem "Trebuchet MS", sans-serif;
+            text-transform: uppercase;
+        }
+
+        h1, h2, h3 { line-height: 1.15; }
+        h1 { max-width: 10ch; margin: 0; font-size: clamp(3rem, 7vw, 5.6rem); font-weight: 500; }
+        .intro-copy { max-width: 54ch; margin: 1.4rem 0 0; color: var(--muted); font-size: 1.1rem; }
+
+        mark { padding: 0 0.2em; background: #f5d780; color: var(--ink); }
+
+        .portrait {
+            display: block;
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            border-radius: 46% 46% 8px 8px;
+            border: 8px solid var(--surface);
+            box-shadow: 0 16px 40px #193b3a1c;
+        }
+
+        section { padding: 3.5rem 0; border-top: 1px solid var(--line); }
+        .section-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
+        h2 { margin: 0; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 500; }
+        h3 { margin: 0 0 0.8rem; font-size: 1.25rem; }
+        .section-note { margin: 0; color: var(--muted); font: 0.9rem "Trebuchet MS", sans-serif; }
+
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .about-grid p { margin-top: 0; }
+
+        details { margin-top: 1.2rem; border-top: 1px solid var(--line); padding-top: 1rem; }
+        summary { color: var(--teal); cursor: pointer; font-weight: 700; }
+        details p { margin-bottom: 0; color: var(--muted); }
+
+        .table-wrap { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; background: var(--surface); text-align: left; }
+        th, td { padding: 0.9rem 1rem; border-bottom: 1px solid var(--line); }
+        th { color: var(--teal); font: 700 0.85rem "Trebuchet MS", sans-serif; }
+
+        .media-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+        video { display: block; width: 100%; aspect-ratio: 16 / 9; background: #dce9e1; }
+        .media-caption { margin: 0.6rem 0 0; color: var(--muted); font-size: 0.9rem; }
+
+        form { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 1.25rem; }
+        .field { display: grid; gap: 0.35rem; }
+        .field label, legend { color: var(--muted); font: 700 0.85rem "Trebuchet MS", sans-serif; }
+        input[type="text"], input[type="email"], input[type="password"] {
+            width: 100%; min-height: 2.8rem; padding: 0.65rem 0.75rem;
+            border: 1px solid #b8c8bf; border-radius: 4px; background: var(--surface);
+            color: var(--ink); font: 1rem Georgia, serif;
+        }
+        fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
+        fieldset label { display: inline-flex; align-items: center; gap: 0.4rem; margin: 0.4rem 1rem 0 0; }
+        input[type="radio"], input[type="checkbox"] { accent-color: var(--teal); }
+        .form-actions { display: flex; align-items: center; gap: 1rem; grid-column: 1 / -1; }
+        button {
+            min-height: 2.8rem; padding: 0.65rem 1.1rem; border: 0; border-radius: 4px;
+            background: var(--teal); color: white; cursor: pointer;
+            font: 700 0.9rem "Trebuchet MS", sans-serif;
+        }
+        button:hover, button:focus-visible { background: #104c47; }
+        #hello-message { min-height: 1.5em; margin: 0; color: var(--muted); }
+
+        footer { padding: 1.5rem 1.25rem; background: var(--ink); color: #f7f5ef; text-align: center; }
+        footer p { margin: 0; font-size: 0.9rem; }
+
+        @media (max-width: 700px) {
+            .topbar { align-items: flex-start; flex-direction: column; gap: 0.65rem; }
+            nav { gap: 0.8rem 1rem; }
+            .intro { grid-template-columns: 1fr; padding-top: 3.5rem; }
+            .portrait { width: min(100%, 340px); justify-self: center; }
+            .about-grid, .media-layout { grid-template-columns: 1fr; }
+            form { grid-template-columns: 1fr; }
+            .form-actions { grid-column: auto; flex-wrap: wrap; }
+            .section-heading { align-items: flex-start; flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="#home">AM / PROFILE</a>
+        <nav aria-label="Main navigation">
+            <a href="#about">About</a>
+            <a href="#education">Education</a>
+            <a href="#interests">Interests</a>
+            <a href="#contact">Contact</a>
+            <a href="problem2.py" download="Download Code" class="download-btn">Download File </a>
+        </nav>
+    </header>
+
+    <main id="home">
+        <section class="intro" aria-labelledby="profile-title">
+            <div>
+                <p class="eyebrow">A little about me</p>
+                <h2 id="profile-title">Hello, I'm Al-Emdad Sikder.</h2>
+                <p class="intro-copy">I’m a curious learner, a thoughtful teammate, and someone who loves turning small ideas into useful things. A curious learner, a thoughtful teammate, and someone who loves turning small ideas into useful things. I believe the best work starts with <mark>staying curious</mark>. </p>
+                <a href="../" class="download-btn">Browse & Download Files </a>    
+            </div>
+            <img class="portrait" src="images.jpeg" alt="Portrait of a smiling person outdoors">
+        </section>
+
+        <section id="about" aria-labelledby="about-title">
+            <div class="section-heading">
+                <h2 id="about-title">A bit about me</h2>
+                <p class="section-note">Based in Bangladesh, Dhaka</p>
+            </div>
+            <div class="about-grid">
+                <p>I enjoy learning how things work and finding creative ways to solve everyday problems. Outside of class, you can usually find me exploring a new trail, sharing a book recommendation, or making a very ambitious weekend playlist.</p>
+                <p><strong>I value kindness and follow-through.</strong> <em>Good questions make any project better,</em> and <u>there is always something new to learn</u>.</p>
+            </div>
+            <details>
+                <summary>One more thing about me</summary>
+                <p>I once planned a short weekend hike that turned into an all-day adventure. Now I always bring an extra snack and a paper map.</p>
+            </details>
+        </section>
+
+        <section id="education" aria-labelledby="education-title">
+            <div class="section-heading">
+                <h2 id="education-title">Education</h2>
+                <p class="section-note">A few milestones along the way</p>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th scope="col">Qualification</th><th scope="col">Institution</th><th scope="col">Year</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>S.S.C</td><td>Motijheel Model High School</td><td>1998</td></tr>
+                        <tr><td>H.S.C</td><td>Govt. Titumir College</td><td>2000</td></tr>
+                        <tr><td>B.Sc Enginerring</td><td>Daffodil International University</td><td>2005</td></tr>
+                        <tr><td>M.Sc Enginerring</td><td>National University</td><td>2010</td></tr>
+                        <tr><td>LL.B. </td><td>ADUST</td><td>2014</td></tr>
+                        <tr><td>MPA in G.P.P. </td><td>Dhaka University</td><td>2018</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="interests" aria-labelledby="interests-title">
+            <div class="section-heading">
+                <h2 id="interests-title">Things I enjoy</h2>
+                <p class="section-note">A little time outside the classroom</p>
+            </div>
+            <div class="media-layout">
+                <div>
+                    <h3>Finding new trails</h3>
+                    <video controls preload="metadata" poster="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&amp;fit=crop&amp;w=1000&amp;q=80">
+                        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+                        Your browser does not support the video element.
+                    </video>
+                    <p class="media-caption">A little reminder to slow down and notice what’s growing.</p>
+                </div>
+                <div>
+                    <h3>Say hello</h3>
+                    <p>Share a few details and let's find something in common.</p>
+                    <form action="#contact" method="get">
+                        <div class="field">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" autocomplete="name" required>
+                        </div>
+                        <div class="field">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" autocomplete="email" required>
+                        </div>
+                        <div class="field">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" placeholder="Enter your password or OTP CODE" autocomplete="new-password" required>
+                        </div>
+                        <fieldset>
+                            <legend>Gender</legend>
+                            <label><input type="radio" name="gender" value="woman"> Woman</label>
+                            <label><input type="radio" name="gender" value="man"> Man</label>
+                            <label><input type="radio" name="gender" value="nonbinary"> Non-binary</label>
+                            <label><input type="radio" name="gender" value="prefer-not-to-say"> Prefer not to say</label>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Hobbies</legend>
+                            <label><input type="checkbox" name="hobbies" value="reading"> Reading</label>
+                            <label><input type="checkbox" name="hobbies" value="hiking"> Hiking</label>
+                            <label><input type="checkbox" name="hobbies" value="music"> Music</label>
+                        </fieldset>
+                        <div class="form-actions" id="contact">
+                            <button type="submit">Send details</button>
+                            <button type="button" id="hello-button">Say hello</button>
+                            <p id="hello-message" aria-live="polite"></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Made with care by Al-Emdad · 2026</p>
+    </footer>
+
+    <script>
+        document.getElementById("hello-button").addEventListener("click", function () {
+            document.getElementById("hello-message").textContent = "Hello there. Thanks for stopping by!";
+        });
+    </script>
+</body>
+</html>
